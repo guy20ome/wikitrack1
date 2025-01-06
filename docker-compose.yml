@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  mediawiki:
+    image: mediawiki:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./images:/var/www/html/images
+    environment:
+      MEDIAWIKI_DB_HOST: db
+      MEDIAWIKI_DB_USER: wikiuser
+      MEDIAWIKI_DB_PASSWORD: examplepass
+      MEDIAWIKI_DB_NAME: wikidb
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: wikidb
+      MYSQL_USER: wikiuser
+      MYSQL_PASSWORD: examplepass
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
