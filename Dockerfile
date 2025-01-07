@@ -35,6 +35,6 @@ ENV MEDIAWIKI_DB_HOST=localhost \
     MYSQL_ROOT_PASSWORD=rootpass
 
 # Start MariaDB and Apache services
-CMD service mysql start && \
-    mysql -uroot -e "CREATE DATABASE IF NOT EXISTS ${MEDIAWIKI_DB_NAME}; GRANT ALL PRIVILEGES ON ${MEDIAWIKI_DB_NAME}.* TO '${MEDIAWIKI_DB_USER}'@'localhost' IDENTIFIED BY '${MEDIAWIKI_DB_PASSWORD}';" && \
+CMD service mariadb start && \
+    mariadb -uroot -e "CREATE DATABASE IF NOT EXISTS ${MEDIAWIKI_DB_NAME}; GRANT ALL PRIVILEGES ON ${MEDIAWIKI_DB_NAME}.* TO '${MEDIAWIKI_DB_USER}'@'localhost' IDENTIFIED BY '${MEDIAWIKI_DB_PASSWORD}';" && \
     apache2-foreground
