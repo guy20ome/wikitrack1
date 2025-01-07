@@ -8,6 +8,14 @@ FROM mediawiki:latest
 # Base image for MediaWiki
 FROM php:8.1-apache
 
+# Update package manager and install dependencies
+RUN apt-get update && apt-get install -y \
+    libicu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install necessary dependencies and MariaDB server
 RUN apt-get update && apt-get install -y \
     mariadb-server \
