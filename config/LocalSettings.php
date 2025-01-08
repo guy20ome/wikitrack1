@@ -11,9 +11,9 @@
 # https://www.mediawiki.org/wiki/Manual:Configuration_settings
 
 # Protect against web entry
-if ( !defined( 'MEDIAWIKI' ) ) {
-	exit;
-}
+#if ( !defined( 'MEDIAWIKI' ) ) {
+#	exit;
+#}
 
 
 ## Uncomment this to disable output compression
