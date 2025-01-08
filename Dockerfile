@@ -1,3 +1,5 @@
+# Final Stage: Add LocalSettings.php
+FROM base as final
 
 # Copy LocalSettings.php into the MediaWiki root
 COPY config/LocalSettings.php /var/www/html/LocalSettings.php
