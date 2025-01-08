@@ -1,7 +1,8 @@
 # Dockerfile
 
 # Base Stage: Build the MediaWiki container
-FROM mediawiki:latest as base
+FROM mediawiki:latest 
+#as base
 
 # Copy extensions or additional configurations if needed
 # COPY ./extensions /var/www/html/extensions
@@ -47,7 +48,7 @@ CMD service mariadb start && \
     apache2-foreground
 
 # Final Stage: Add LocalSettings.php
-FROM base as final
+#FROM base as final
 
 # Copy LocalSettings.php into the MediaWiki root
 #COPY config/LocalSettings.php /var/www/html/LocalSettings.php
