@@ -51,6 +51,7 @@ FROM base as final
 
 # Copy LocalSettings.php into the MediaWiki root
 COPY config/LocalSettings.php /var/www/html/LocalSettings.php
+RUN chmod -R 755 /var/www/html/LocalSettings.php
 
 # restart Apache services
 #CMD apache2-foreground
