@@ -29,8 +29,8 @@ RUN curl -L https://releases.wikimedia.org/mediawiki/1.39/mediawiki-1.39.3.tar.g
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Copy custom configuration files, if needed (replace with your own file paths)
-# COPY LocalSettings.php /var/www/html/
+# Copy LocalSettings.php into the MediaWiki root
+COPY config/LocalSettings.php /var/www/html/LocalSettings.php
 
 # Expose port 80
 EXPOSE 80
