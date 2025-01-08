@@ -1,5 +1,7 @@
 # Dockerfile
-FROM mediawiki:latest
+
+# Base Stage: Build the MediaWiki container
+FROM mediawiki:latest as base
 
 # Copy extensions or additional configurations if needed
 # COPY ./extensions /var/www/html/extensions
@@ -29,9 +31,6 @@ RUN curl -L https://releases.wikimedia.org/mediawiki/1.39/mediawiki-1.39.3.tar.g
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Copy LocalSettings.php into the MediaWiki root
-# COPY config/LocalSettings.php /var/www/html/LocalSettings.php
-
 # Expose port 80
 EXPOSE 80
 
@@ -46,3 +45,14 @@ ENV MEDIAWIKI_DB_HOST=localhost \
 CMD service mariadb start && \
     mariadb -uroot -e "CREATE DATABASE IF NOT EXISTS ${MEDIAWIKI_DB_NAME}; GRANT ALL PRIVILEGES ON ${MEDIAWIKI_DB_NAME}.* TO '${MEDIAWIKI_DB_USER}'@'localhost' IDENTIFIED BY '${MEDIAWIKI_DB_PASSWORD}';" && \
     apache2-foreground
+
+# Final Stage: Add LocalSettings.php
+FROM base as final
+
+# Copy LocalSettings.php into the MediaWiki root
+COPY config/LocalSettings.php /var/www/html/LocalSettings.php
+
+# restart Apache services
+#CMD apache2-foreground
+
+
