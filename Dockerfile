@@ -30,7 +30,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
 # Copy LocalSettings.php into the MediaWiki root
-COPY config/LocalSettings.php /var/www/html/LocalSettings.php
+# COPY config/LocalSettings.php /var/www/html/LocalSettings.php
 
 # Expose port 80
 EXPOSE 80
